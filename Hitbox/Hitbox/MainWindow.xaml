@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hitbox"
         mc:Ignorable="d"
-        Title="Hitbox Streamer Manager" Height="350" Width="525">
+        Style="{StaticResource HelveticaStyle}"
+        MinHeight="300" MinWidth="825"
+        Title="Hitbox Streamer Manager" Height="350" Width="825">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.075*"/>
+            <RowDefinition Height="20px"/>
             <RowDefinition Height="0.9*"/>
         </Grid.RowDefinitions>
 
@@ -19,7 +21,7 @@
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0">
-                <ListBox ItemsSource="{Binding ListeStreamers, UpdateSourceTrigger=PropertyChanged}" SelectedValue="{Binding Streamer, UpdateSourceTrigger=PropertyChanged}" x:Name="List" Margin="2,2,10,2" SelectedIndex="0"/>
+                <ListBox ItemsSource="{Binding ListStreamers, UpdateSourceTrigger=PropertyChanged}" SelectedValue="{Binding Streamer, UpdateSourceTrigger=PropertyChanged}" x:Name="List" Margin="2,2,10,2" SelectedIndex="0"/>
             </Grid>
 
             <Grid Grid.Column="1">
@@ -27,7 +29,7 @@
                     <RowDefinition Height="0.3*"/>
                     <RowDefinition Height="0.2*"/>
                     <RowDefinition Height="0.3*"/>
-                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="30px"/>
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
@@ -44,16 +46,36 @@
                         <ColumnDefinition Width="0.25*"/>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                        </Grid.ColumnDefinitions>
                         <Label Content="Follows"></Label>
+                        <Label x:Name="Name" Grid.Column="1" Content="{Binding Streamer.Followers, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                     <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                        </Grid.ColumnDefinitions>
                         <Label Content="Views"></Label>
-                    </Grid>
-                    <Grid Grid.Column="2">
-                        <Label Content="Subscribers"></Label>
+                        <Label x:Name="Views" Grid.Column="1" Content="{Binding Streamer.Viewers, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                     <Grid Grid.Column="3">
-                        <Label Content="Last"></Label>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Followers"></Label>
+                        <Label x:Name="Followers" Grid.Column="1" Content="{Binding Streamer.Followers, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Subscribers"></Label>
+                        <Label x:Name="Subscribers" Grid.Column="1" Content="{Binding Streamer.SubCount, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                 </Grid>
 
@@ -67,14 +89,14 @@
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
+                    <Grid Grid.Column="0" Margin="5 2">
                         <Button Content="Add"></Button>
                     </Grid>
-                    <Grid Grid.Column="1">
+                    <Grid Grid.Column="1" Margin="5 2">
                         <Button Content="Modify"></Button>
                     </Grid>
-                    <Grid Grid.Column="2">
-                        <Button Content="Remvoe"></Button>
+                    <Grid Grid.Column="2" Margin="5 2">
+                        <Button Content="Remove"></Button>
                     </Grid>
                 </Grid>
             </Grid>

@@ -55,6 +55,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Library\NotifyPropertyChangedBase.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="Website\Emote.cs" />
     <Compile Include="Website\Streamer.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

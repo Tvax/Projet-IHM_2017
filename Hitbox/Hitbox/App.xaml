@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:Hitbox"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style x:Key="HelveticaStyle" TargetType="{x:Type Control}">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontFamily" Value="Helvetica" />
+            <Setter Property="FontStyle" Value="Normal" />
+        </Style>
     </Application.Resources>
 </Application>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hitbox.ViewModels {
-    class MainViewModel {
+namespace Hitbox.Website {
+    class Emote {
     }
 }
