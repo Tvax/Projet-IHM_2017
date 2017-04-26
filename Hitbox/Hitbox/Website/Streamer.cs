@@ -8,15 +8,14 @@ namespace Hitbox.Website {
         public int _viewers;
         private int _followers;
         private Boolean _subActivated;
-        private int _subCount;
-        private ObservableCollection<Emote> _listEmotes;
+        private ObservableCollection<Emote> _listPPFollowers;
 
         public String Name { get; set; }
         public int Viewers { get; set; }
         public int Followers { get; set; }
         public Boolean SubActivated { get; set; }
         public int SubCount { get; set; }
-        public ObservableCollection<Emote> ListEmotes { get; set; }
+        public ObservableCollection<Emote> ListPPFollowers { get; set; }
         //displayed by creating an copy in MainView??
         //
 
@@ -39,7 +38,6 @@ namespace Hitbox.Website {
             this._viewers = 0;
             this._followers = 0;
             this._subActivated = false;
-            this._subCount = 0;
         }
 
         private Boolean checkUsernameExists() {
@@ -50,7 +48,8 @@ namespace Hitbox.Website {
         }
 
         public override string ToString() {
-            return string.Format(_name);
+            return s
+                tring.Format(_name);
         }
     }
 

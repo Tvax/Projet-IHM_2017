@@ -54,6 +54,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="API\Request.cs" />
+    <Compile Include="API\User.cs" />
+    <Compile Include="API\Views.cs" />
     <Compile Include="Library\NotifyPropertyChangedBase.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="Website\Emote.cs" />
