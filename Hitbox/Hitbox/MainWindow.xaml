@@ -1,0 +1,92 @@
+﻿<Window x:Class="Hitbox.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hitbox"
+        mc:Ignorable="d"
+        Title="Hitbox Streamer Manager" Height="350" Width="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.075*"/>
+            <RowDefinition Height="0.9*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="0.8*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <ListBox ItemsSource="{Binding ListeStreamers, UpdateSourceTrigger=PropertyChanged}" SelectedValue="{Binding Streamer, UpdateSourceTrigger=PropertyChanged}" x:Name="List" Margin="2,2,10,2" SelectedIndex="0"/>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.3*"/>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="0.3*"/>
+                    <RowDefinition Height="0.1*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.4*"/>
+                        <ColumnDefinition Width="0.6*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.25*"/>
+                        <ColumnDefinition Width="0.25*"/>
+                        <ColumnDefinition Width="0.25*"/>
+                        <ColumnDefinition Width="0.25*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Label Content="Follows"></Label>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Label Content="Views"></Label>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <Label Content="Subscribers"></Label>
+                    </Grid>
+                    <Grid Grid.Column="3">
+                        <Label Content="Last"></Label>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <ListViewItem></ListViewItem>
+                </Grid>
+
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Button Content="Add"></Button>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Button Content="Modify"></Button>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <Button Content="Remvoe"></Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Save"/>
+                <MenuItem Header="_Theme"/>
+                <Separator />
+                <MenuItem Header="_Save and Quit"/>
+            </MenuItem>
+        </Menu>
+    </Grid>
+
+</Window>

@@ -1,0 +1,3 @@
+C:\Users\teiva\Desktop\Projet-IHM_2017-master\Hitbox\Library\obj\Debug\Library.csprojResolveAssemblyReference.cache
+C:\Users\teiva\Desktop\Projet-IHM_2017-master\Hitbox\Library\obj\Debug\Library.Properties.Resources.resources
+C:\Users\teiva\Desktop\Projet-IHM_2017-master\Hitbox\Library\obj\Debug\Library.csproj.GenerateResource.Cache
