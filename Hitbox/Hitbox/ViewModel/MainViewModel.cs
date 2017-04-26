@@ -2,6 +2,8 @@
 using Hitbox.Website;
 using System.Collections.ObjectModel;
 
+//TODO add banner in background?
+
 namespace Hitbox.ViewModel {
     class MainViewModel : NotifyPropertyChangedBase {
 
