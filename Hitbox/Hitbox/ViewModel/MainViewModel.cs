@@ -25,7 +25,9 @@ namespace Hitbox.ViewModel {
         public MainViewModel() {
             ListStreamers = new ObservableCollection<Streamer>();
             Streamer = new Streamer();
+            Streamer Streamer2 = new Streamer();
             ListStreamers.Add(Streamer);
+            //ListStreamers.Add(Streamer2);
         }
     }
 }

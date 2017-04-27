@@ -1,55 +1,108 @@
-﻿using Hitbox.Library;
+﻿using Hitbox.API;
+using Hitbox.Library;
+using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
+using System.Net;
+using static Hitbox.API.Request;
 
 namespace Hitbox.Website {
     class Streamer : NotifyPropertyChangedBase {
-        private String _name;
-        public int _viewers;
-        private int _followers;
-        private Boolean _subActivated;
-        private ObservableCollection<Emote> _listPPFollowers;
+        private string _name;
+        public string _viewers;
+        private string _followers;
+        private string _subActivated;
+        private ObservableCollection<Follower> _listFollowers;
 
-        public String Name { get; set; }
-        public int Viewers { get; set; }
-        public int Followers { get; set; }
-        public Boolean SubActivated { get; set; }
-        public int SubCount { get; set; }
-        public ObservableCollection<Emote> ListPPFollowers { get; set; }
+        private string _url;
+        private WebClient _webClient;
+
+
+        public string Name {
+            get { return _name; }
+            set { _name = value; }
+        }
+
+        public string Viewers {
+            get { return _viewers; }
+            set { _viewers = value; }
+        }
+
+        public string Followers {
+            get { return _followers; }
+            set { _followers = value; }
+        }
+
+        public string SubActivated {
+            get { return _subActivated; }
+            set { _subActivated = value; }
+        }
+        public ObservableCollection<Follower> ListFollowers {
+            get { return _listFollowers; }
+            set { _listFollowers = value;
+                NotifyPropertyChanged("ListFollowers");
+                NotifyPropertyChanged("Follower");
+            }
+        }
         //displayed by creating an copy in MainView??
         //
 
-
         public Streamer() {
-            defaultStreamer();
+            _webClient = new WebClient();
 
-            if (!checkUsernameExists())
-                throw new Exception("Username Unknown");//open error window
-            
-            getStreamerEmotes();
-        }
-
-        private void getStreamerEmotes() {
-            //_listEmotes = images
+            //defaultStreamer();
+            _name = "masta";
+            getUser();
+            getViews();     
+            getLastFollowers();
         }
 
         private void defaultStreamer() {
-            this._name = "Name";
-            this._viewers = 0;
-            this._followers = 0;
-            this._subActivated = false;
+            _name = "masta";
+            _viewers = "0";
+            _followers = "0";
+            _subActivated = "No";//display sub disabled, whereas "subscribers on/off" on xaml?
         }
 
-        private Boolean checkUsernameExists() {
-            //call api
-            //if error return false
+        private void getUser() {
+            _url = "https://api.hitbox.tv/user/" + _name;
+            string json = _webClient.DownloadString(_url);
 
-            return true;
+            User.RootObject user = JsonConvert.DeserializeObject<User.RootObject>(json);
+
+            if (string.IsNullOrEmpty(user.user_name))
+                throw new Exception("Username Unknown");//open error window
+
+            _name = user.user_name;
+            _followers = user.followers;
+
+            if (user.user_partner == "1")
+                _subActivated = "On";
+            else
+                _subActivated = "Off";
+        }
+
+        private void getViews() {
+            _url = "https://api.hitbox.tv/media/views/" + _name;
+            string json = _webClient.DownloadString(_url);
+            Views.RootObject views = JsonConvert.DeserializeObject<Views.RootObject>(json);
+
+            try { _viewers = views.total_live_views; }
+            catch { _viewers = "0"; }
+
+        }
+
+        private void getLastFollowers() {
+            _url = "https://api.hitbox.tv/followers/user/" + _name + "?limit=5";
+            string json = _webClient.DownloadString(_url);
+            Request.RootObject lastFollowers = JsonConvert.DeserializeObject<Request.RootObject>(json);
+
+            _listFollowers = new ObservableCollection<Follower>(lastFollowers.followers);
+
         }
 
         public override string ToString() {
-            return s
-                tring.Format(_name);
+            return string.Format(_name);
         }
     }
 

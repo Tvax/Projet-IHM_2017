@@ -75,12 +75,18 @@
                             <ColumnDefinition Width="0.5*"/>
                         </Grid.ColumnDefinitions>
                         <Label Content="Subscribers"></Label>
-                        <Label x:Name="Subscribers" Grid.Column="1" Content="{Binding Streamer.SubCount, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label x:Name="Subscribers" Grid.Column="1" Content="{Binding Streamer.SubActivated, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                 </Grid>
 
                 <Grid Grid.Row="2">
-                    <ListViewItem></ListViewItem>
+                    <ListBox ItemsSource="{Binding Streamer.ListFollowers, UpdateSourceTrigger=PropertyChanged}" SelectedValue="{Binding Follower, UpdateSourceTrigger=PropertyChanged}" x:Name="ListFollowers" Margin="2,2,10,2" SelectedIndex="0">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
                 </Grid>
 
                 <Grid Grid.Row="3">
