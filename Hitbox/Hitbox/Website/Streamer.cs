@@ -14,22 +14,17 @@ namespace Hitbox.Website {
         private string _followers;
         private string _subActivated;
         private BitmapImage _profilePic;
+        private ObservableCollection<BitmapImage> _listProfilePicture = new ObservableCollection<BitmapImage>();
 
         private WebClient _webClient;
         private string _url;
-
-        
-
-        private ObservableCollection<BitmapImage> _listProfilePicture = new ObservableCollection<BitmapImage>();
+       
         public ObservableCollection<BitmapImage> ListProfilePicture {
             get { return _listProfilePicture; }
             set { _listProfilePicture = value;
                 NotifyPropertyChanged("ListProfilePicture");
-                
             }
         }
-
-       //public Follower Follower { get; set; }
 
         public string Name {
             get { return _name; }
@@ -56,21 +51,10 @@ namespace Hitbox.Website {
             set { _profilePic = value; }
         }
 
-        //public ObservableCollection<Follower> ListFollowers {
-        //    get { return _listFollowers; }
-        //    set {
-        //        _listFollowers = value;
-        //        NotifyPropertyChanged("ListFollowers");
-        //        NotifyPropertyChanged("Follower");
-        //    }
-        //}
-        //displayed by creating an copy in MainView??
-        //
-
         public Streamer() {
             _webClient = new WebClient();
-
             //defaultStreamer();
+
             _name = "masta";
             getUser();
             getViews();
@@ -95,8 +79,7 @@ namespace Hitbox.Website {
 
             _name = user.user_name;
             _followers = user.followers;
-            _profilePic = new BitmapImage(new Uri("https://edge.sf.hitbox.tv" + user.user_logo));
-            
+            _profilePic = new BitmapImage(new Uri("https://edge.sf.hitbox.tv" + user.user_logo));         
 
             if (user.user_partner == "1")
                 _subActivated = "On";
