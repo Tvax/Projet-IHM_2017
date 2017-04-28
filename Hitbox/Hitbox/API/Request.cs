@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Windows.Media.Imaging;
 
 namespace Hitbox.API {
     public class Request {
@@ -14,6 +15,7 @@ namespace Hitbox.API {
             public string follower_user_id { get; set; }
             public string follower_notify { get; set; }
             public string date_added { get; set; }
+            public BitmapImage UserLogo { get; set; }
 
             public override string ToString() {
                 return string.Format(user_name);

@@ -5,6 +5,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Net;
 using static Hitbox.API.Request;
+using System.Windows.Media.Imaging;
 
 namespace Hitbox.Website {
     class Streamer : NotifyPropertyChangedBase {
@@ -12,11 +13,23 @@ namespace Hitbox.Website {
         public string _viewers;
         private string _followers;
         private string _subActivated;
-        private ObservableCollection<Follower> _listFollowers;
+        private BitmapImage _profilePic;
 
-        private string _url;
         private WebClient _webClient;
+        private string _url;
 
+        
+
+        private ObservableCollection<BitmapImage> _listProfilePicture = new ObservableCollection<BitmapImage>();
+        public ObservableCollection<BitmapImage> ListProfilePicture {
+            get { return _listProfilePicture; }
+            set { _listProfilePicture = value;
+                NotifyPropertyChanged("ListProfilePicture");
+                
+            }
+        }
+
+       //public Follower Follower { get; set; }
 
         public string Name {
             get { return _name; }
@@ -37,13 +50,20 @@ namespace Hitbox.Website {
             get { return _subActivated; }
             set { _subActivated = value; }
         }
-        public ObservableCollection<Follower> ListFollowers {
-            get { return _listFollowers; }
-            set { _listFollowers = value;
-                NotifyPropertyChanged("ListFollowers");
-                NotifyPropertyChanged("Follower");
-            }
+
+        public BitmapImage ProfilePic {
+            get { return _profilePic; }
+            set { _profilePic = value; }
         }
+
+        //public ObservableCollection<Follower> ListFollowers {
+        //    get { return _listFollowers; }
+        //    set {
+        //        _listFollowers = value;
+        //        NotifyPropertyChanged("ListFollowers");
+        //        NotifyPropertyChanged("Follower");
+        //    }
+        //}
         //displayed by creating an copy in MainView??
         //
 
@@ -53,7 +73,7 @@ namespace Hitbox.Website {
             //defaultStreamer();
             _name = "masta";
             getUser();
-            getViews();     
+            getViews();
             getLastFollowers();
         }
 
@@ -75,6 +95,8 @@ namespace Hitbox.Website {
 
             _name = user.user_name;
             _followers = user.followers;
+            _profilePic = new BitmapImage(new Uri("https://edge.sf.hitbox.tv" + user.user_logo));
+            
 
             if (user.user_partner == "1")
                 _subActivated = "On";
@@ -89,16 +111,17 @@ namespace Hitbox.Website {
 
             try { _viewers = views.total_live_views; }
             catch { _viewers = "0"; }
-
         }
 
         private void getLastFollowers() {
             _url = "https://api.hitbox.tv/followers/user/" + _name + "?limit=5";
             string json = _webClient.DownloadString(_url);
-            Request.RootObject lastFollowers = JsonConvert.DeserializeObject<Request.RootObject>(json);
+            RootObject lastFollowers = JsonConvert.DeserializeObject<Request.RootObject>(json);
 
-            _listFollowers = new ObservableCollection<Follower>(lastFollowers.followers);
-
+            ObservableCollection<Follower> lastF = new ObservableCollection<Follower>(lastFollowers.followers);
+            foreach (Follower f in lastF) {
+                ListProfilePicture.Add(new BitmapImage(new Uri("https://edge.sf.hitbox.tv" + f.user_logo_small)));
+            }
         }
 
         public override string ToString() {

@@ -21,7 +21,7 @@
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0">
-                <ListBox ItemsSource="{Binding ListStreamers, UpdateSourceTrigger=PropertyChanged}" SelectedValue="{Binding Streamer, UpdateSourceTrigger=PropertyChanged}" x:Name="List" Margin="2,2,10,2" SelectedIndex="0"/>
+                <ListView ItemsSource="{Binding ListStreamers, UpdateSourceTrigger=PropertyChanged}" SelectedValue="{Binding Streamer, UpdateSourceTrigger=PropertyChanged}" x:Name="List" Margin="2,2,10,2" SelectedIndex="0"/>
             </Grid>
 
             <Grid Grid.Column="1">
@@ -32,11 +32,18 @@
                     <RowDefinition Height="30px"/>
                 </Grid.RowDefinitions>
 
+                
+
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.4*"/>
                         <ColumnDefinition Width="0.6*"/>
                     </Grid.ColumnDefinitions>
+
+                    <Grid>
+                        <Image Source="{Binding Streamer.ProfilePic}"/>
+                    </Grid>
+                    
                 </Grid>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -80,12 +87,14 @@
                 </Grid>
 
                 <Grid Grid.Row="2">
-                    <ListBox ItemsSource="{Binding Streamer.ListFollowers, UpdateSourceTrigger=PropertyChanged}" SelectedValue="{Binding Follower, UpdateSourceTrigger=PropertyChanged}" x:Name="ListFollowers" Margin="2,2,10,2" SelectedIndex="0">
-                        <ListBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal"/>
-                            </ItemsPanelTemplate>
-                        </ListBox.ItemsPanel>
+                    <ListBox ItemsSource="{Binding Streamer.ListProfilePicture, UpdateSourceTrigger=PropertyChanged}" SelectedValue="{Binding Streamer, UpdateSourceTrigger=PropertyChanged}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{Binding}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
                     </ListBox>
                 </Grid>
 
