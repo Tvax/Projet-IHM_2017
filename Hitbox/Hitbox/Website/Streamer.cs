@@ -8,7 +8,7 @@ using static Hitbox.API.Request;
 using System.Windows.Media.Imaging;
 
 namespace Hitbox.Website {
-    class Streamer : NotifyPropertyChangedBase {
+    public class Streamer : NotifyPropertyChangedBase {
         private string _name;
         public string _viewers;
         private string _followers;
@@ -18,10 +18,11 @@ namespace Hitbox.Website {
 
         private WebClient _webClient;
         private string _url;
-       
+
         public ObservableCollection<BitmapImage> ListProfilePicture {
             get { return _listProfilePicture; }
-            set { _listProfilePicture = value;
+            set {
+                _listProfilePicture = value;
                 NotifyPropertyChanged("ListProfilePicture");
             }
         }
@@ -52,10 +53,10 @@ namespace Hitbox.Website {
         }
 
         public Streamer() {
-            _webClient = new WebClient();
-            //defaultStreamer();
+            _webClient = new WebClient();    
+        }
 
-            _name = "masta";
+        public void LoadStreamerInfo() {
             getUser();
             getViews();
             getLastFollowers();
@@ -79,7 +80,7 @@ namespace Hitbox.Website {
 
             _name = user.user_name;
             _followers = user.followers;
-            _profilePic = new BitmapImage(new Uri("https://edge.sf.hitbox.tv" + user.user_logo));         
+            _profilePic = new BitmapImage(new Uri("https://edge.sf.hitbox.tv" + user.user_logo));
 
             if (user.user_partner == "1")
                 _subActivated = "On";
