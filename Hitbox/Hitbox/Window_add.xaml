@@ -7,13 +7,13 @@
         mc:Ignorable="d"
         Title="Window_add" Height="300" Width="300">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
         <TextBox x:Name="Add_Name" Text="{Binding Streamer.Name}"/>
-        <Button Content="OK" Grid.Column="1" Command="{Binding OKCommand}"/>
+        <Button Content="OK" Grid.Row="1" Command="{Binding OKCommand}"/>
 
     </Grid>
 </Window>

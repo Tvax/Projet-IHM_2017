@@ -5,6 +5,10 @@ using System;
 using System.Collections.ObjectModel;
 
 //TODO add banner in background?
+//TODO exception while adding streamer: 
+//json error, streamer doesnt exists
+//less than 5 follows
+//views displays "false" change it to "0"
 
 namespace Hitbox.ViewModel {
     class MainViewModel : NotifyPropertyChangedBase {

@@ -29,6 +29,9 @@ namespace Hitbox.ViewModel {
         }
 
         private void OnOKAction(object o) {
+
+            if(usernamevalid)
+
             Streamer.LoadStreamerInfo();
             //Valid = true;
             _streamer = Streamer;

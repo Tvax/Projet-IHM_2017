@@ -71,6 +71,7 @@ namespace Hitbox.Website {
 
         private void getUser() {
             _url = "https://api.hitbox.tv/user/" + _name;
+
             string json = _webClient.DownloadString(_url);
 
             User.RootObject user = JsonConvert.DeserializeObject<User.RootObject>(json);
