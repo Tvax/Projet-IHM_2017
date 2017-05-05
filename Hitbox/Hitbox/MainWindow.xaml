@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hitbox"
         mc:Ignorable="d"
-        Style="{StaticResource HelveticaStyle}"
         MinHeight="300" MinWidth="825"
         Title="Hitbox Streamer Manager" Height="350" Width="825">
     <Grid>
