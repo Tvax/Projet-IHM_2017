@@ -22,7 +22,7 @@ namespace Hitbox.ViewModel {
         }
 
         public ModifyViewModel(Streamer streamer) {
-            streamer = _streamer;
+            _streamer = streamer;
             OKCommand = new DelegateCommand(OnOKAction, CanExecuteOK);
             CancelCommand = new DelegateCommand(OnCancelAction, CanExecuteCancel);
         }
@@ -36,7 +36,8 @@ namespace Hitbox.ViewModel {
         private void OnOKAction(object o) {
             //if(usernamevalid)
 
-            //Streamer.LoadStreamerInfo();
+            Streamer.ListProfilePicture.Clear();
+            Streamer.LoadStreamerInfo();
             _ans = true;
             _streamer = Streamer;
             ButtonPressedEvent.GetEvent().OnButtonPressedHandler(EventArgs.Empty);

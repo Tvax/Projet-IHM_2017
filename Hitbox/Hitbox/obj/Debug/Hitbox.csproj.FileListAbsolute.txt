@@ -27,7 +27,6 @@ C:\Users\teiva\Desktop\Projet-IHM_2017-master\Hitbox\Hitbox\obj\Debug\Hitbox.csp
 C:\Users\teiva\Desktop\Projet-IHM_2017-master\Hitbox\Hitbox\obj\Debug\Hitbox.exe
 C:\Users\teiva\Desktop\Projet-IHM_2017-master\Hitbox\Hitbox\obj\Debug\Hitbox.pdb
 C:\Users\teiva\Desktop\Projet-IHM_2017-master\Hitbox\Hitbox\obj\Debug\App.baml
-C:\Users\teiva\Documents\GitHub\Projet-IHM_2017\Hitbox\Hitbox\obj\Debug\App.baml
 C:\Users\teiva\Documents\GitHub\Projet-IHM_2017\Hitbox\Hitbox\bin\Debug\Newtonsoft.Json.dll
 C:\Users\teiva\Documents\GitHub\Projet-IHM_2017\Hitbox\Hitbox\bin\Debug\Newtonsoft.Json.xml
 C:\Users\teiva\Documents\GitHub\Projet-IHM_2017\Hitbox\Hitbox\obj\Debug\Window_add.g.cs
