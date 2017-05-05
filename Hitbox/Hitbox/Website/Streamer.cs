@@ -16,6 +16,8 @@ namespace Hitbox.Website {
         private string _subActivated;
         private BitmapImage _profilePic;
         private ObservableCollection<BitmapImage> _listProfilePicture = new ObservableCollection<BitmapImage>();
+        private Window_error _winErr;
+        private string _json;
 
         private WebClient _webClient;
         private string _url;
@@ -26,7 +28,6 @@ namespace Hitbox.Website {
                 _listProfilePicture = value;
                 NotifyPropertyChanged("ListProfilePicture");
                 NotifyPropertyChanged("BitmapImage");
-
             }
         }
 
@@ -108,19 +109,32 @@ namespace Hitbox.Website {
             string json = _webClient.DownloadString(_url);
             Views.RootObject views = JsonConvert.DeserializeObject<Views.RootObject>(json);
 
-            try { _viewers = views.total_live_views; }
-            catch { _viewers = "0"; }
+            if (views.total_live_views == "false")
+                _viewers = "0";
+            else
+             _viewers = views.total_live_views;
+          
         }
 
         private void getLastFollowers() {
             _url = "https://api.hitbox.tv/followers/user/" + _name + "?limit=50";
-            string json = _webClient.DownloadString(_url);
-            RootObject lastFollowers = JsonConvert.DeserializeObject<Request.RootObject>(json);
 
-            ObservableCollection<Follower> lastF = new ObservableCollection<Follower>(lastFollowers.followers);
-            foreach (Follower f in lastF) {
-                ListProfilePicture.Add(new BitmapImage(new Uri("https://edge.sf.hitbox.tv" + f.user_logo_small)));
+            try {
+                _json = _webClient.DownloadString(_url);
+                RootObject lastFollowers = JsonConvert.DeserializeObject<Request.RootObject>(_json);
+
+                ObservableCollection<Follower> lastF = new ObservableCollection<Follower>(lastFollowers.followers);
+                foreach (Follower f in lastF) {
+                    ListProfilePicture.Add(new BitmapImage(new Uri("https://edge.sf.hitbox.tv" + f.user_logo_small)));
+                }
             }
+            catch {
+                _winErr = new Window_error("Unknown streamer !");
+                _winErr.ShowDialog();
+
+                //throw + make it in mainwindow
+            }
+            
         }
 
         public override string ToString() {
