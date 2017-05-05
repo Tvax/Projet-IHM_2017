@@ -58,35 +58,43 @@ namespace Hitbox.ViewModel {
             _winAdd.Name = "Add";
             _winAdd.ShowDialog();
 
-            _listStreamers.Add(_winAdd.ViewModel.Streamer);
+            if (_winAdd.ViewModel.Ans && !string.IsNullOrWhiteSpace(_winAdd.ViewModel.Streamer.Name) && !string.IsNullOrEmpty(_winAdd.ViewModel.Streamer.Name))
+                _listStreamers.Add(_winAdd.ViewModel.Streamer);
+
             NotifyPropertyChanged("Streamer");
             NotifyPropertyChanged("ListStreamers");
         }
 
         private void OnRmAction(object o) {
-            ButtonPressedEvent.GetEvent().Handler += CloseRmView;
+            
+            if (Streamer != null)
+            {
+                ButtonPressedEvent.GetEvent().Handler += CloseRmView;
+                _winRm = new Window_remove(_ans);
+                _winRm.Name = "Remove";
+                _winRm.ShowDialog();
 
-            _winRm = new Window_remove(_ans);
-            _winRm.Name = "Remove";
-            _winRm.ShowDialog();
-
-            if (_winRm.ViewModel.Ans)
-                ListStreamers.Remove(Streamer);
+                if (_winRm.ViewModel.Ans)
+                    ListStreamers.Remove(Streamer);
+            }
         }
 
 
         private void OnModAction(object obj) {
-            ButtonPressedEvent.GetEvent().Handler += CloseModView;
+           
 
-            string nameTmp = Streamer.Name;
+            if (Streamer != null)
+            {
+                ButtonPressedEvent.GetEvent().Handler += CloseModView;
+                string nameTmp = Streamer.Name;
 
-            _winMod = new Window_modify(Streamer);
-            _winMod.Name = "Modify";
-            _winMod.ShowDialog();
+                _winMod = new Window_modify(Streamer);
+                _winMod.Name = "Modify";
+                _winMod.ShowDialog();
 
-            if (!_winMod.ViewModel.Ans || string.IsNullOrWhiteSpace(_winMod.ViewModel.Streamer.Name) || string.IsNullOrEmpty(_winMod.ViewModel.Streamer.Name))
-                Streamer.Name = nameTmp;
-            
+                if (!_winMod.ViewModel.Ans || string.IsNullOrWhiteSpace(_winMod.ViewModel.Streamer.Name) || string.IsNullOrEmpty(_winMod.ViewModel.Streamer.Name))
+                    Streamer.Name = nameTmp;
+            }
             NotifyPropertyChanged("Streamer");
             NotifyPropertyChanged("ListStreamers");
  
