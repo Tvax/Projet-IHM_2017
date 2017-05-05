@@ -22,6 +22,7 @@ namespace Hitbox.ViewModel {
         private Window_modify _winMod { get; set; }
         private ObservableCollection<Streamer> _listStreamers;
         private Streamer _streamer;
+        private bool _ans;
 
         public ObservableCollection<Streamer> ListStreamers {
             get { return _listStreamers; }
@@ -38,8 +39,8 @@ namespace Hitbox.ViewModel {
 
         public MainViewModel() {
             AddCommand = new DelegateCommand(OnAddAction, CanExecuteAdd);
-            //RmCommand = new DelegateCommand(OnRemoveAction, CanExecuteRemove);
-            //ModCommand = new DelegateCommand(OnModAction, CanExecuteMod);
+            RmCommand = new DelegateCommand(OnRmAction, CanExecuteRm);
+            ModCommand = new DelegateCommand(OnModAction, CanExecuteMod);
 
             ListStreamers = new ObservableCollection<Streamer>();
             //Streamer = new Streamer();
@@ -48,6 +49,7 @@ namespace Hitbox.ViewModel {
             //ListStreamers.Add(Streamer2);
         }
 
+
         #region OnActions
         private void OnAddAction(object o) {
             ButtonPressedEvent.GetEvent().Handler += CloseAddView;
@@ -55,15 +57,50 @@ namespace Hitbox.ViewModel {
             _winAdd = new Window_add(_streamer = new Streamer());
             _winAdd.Name = "Add";
             _winAdd.ShowDialog();
-         
+
             _listStreamers.Add(_winAdd.ViewModel.Streamer);
             NotifyPropertyChanged("Streamer");
             NotifyPropertyChanged("ListStreamers");
+        }
+
+        private void OnRmAction(object o) {
+            ButtonPressedEvent.GetEvent().Handler += CloseRmView;
+
+            _winRm = new Window_remove(_ans);
+            _winRm.Name = "Remove";
+            _winRm.ShowDialog();
+
+            if (_winRm.ViewModel.Ans)
+                ListStreamers.Remove(Streamer);
+        }
+
+
+        private void OnModAction(object obj) {
+            ButtonPressedEvent.GetEvent().Handler += CloseModView;
+
+            string nameTmp = Streamer.Name;
+
+            _winMod = new Window_modify(Streamer);
+            _winMod.Name = "Modify";
+            _winMod.ShowDialog();
+
+            if (!_winMod.ViewModel.Ans || string.IsNullOrWhiteSpace(_winMod.ViewModel.Streamer.Name) || string.IsNullOrEmpty(_winMod.ViewModel.Streamer.Name))
+                Streamer.Name = nameTmp;
+            
+            NotifyPropertyChanged("Streamer");
+            NotifyPropertyChanged("ListStreamers");
+
         }
         #endregion
 
         #region CanExecute
         private bool CanExecuteAdd(object o) {
+            return true;
+        }
+        private bool CanExecuteMod(object o) {
+            return true;
+        }
+        private bool CanExecuteRm(object o) {
             return true;
         }
         #endregion
@@ -72,6 +109,14 @@ namespace Hitbox.ViewModel {
         private void CloseAddView(object sender, EventArgs e) {
             _winAdd.Close();
             ButtonPressedEvent.GetEvent().Handler -= CloseAddView;
+        }
+        private void CloseRmView(object sender, EventArgs e) {
+            _winRm.Close();
+            ButtonPressedEvent.GetEvent().Handler -= CloseRmView;
+        }
+        private void CloseModView(object sender, EventArgs e) {
+            _winMod.Close();
+            ButtonPressedEvent.GetEvent().Handler -= CloseModView;
         }
         #endregion
     }

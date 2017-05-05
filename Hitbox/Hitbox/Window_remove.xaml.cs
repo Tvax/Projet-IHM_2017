@@ -1,24 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Hitbox.ViewModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Hitbox {
     /// <summary>
     /// Interaction logic for Window_remove.xaml
     /// </summary>
     public partial class Window_remove : Window {
-        public Window_remove() {
+
+        public RemoveViewModel ViewModel { get; set; }
+
+        public Window_remove(bool ans) {
             InitializeComponent();
+            ViewModel = new RemoveViewModel(ans);
+            DataContext = ViewModel;
         }
     }
 }

@@ -108,10 +108,10 @@
                         <Button Content="Add" Command="{Binding AddCommand}" />
                     </Grid>
                     <Grid Grid.Column="1" Margin="5 2">
-                        <Button Content="Modify"></Button>
+                        <Button Content="Modify" Command="{Binding ModCommand}" />
                     </Grid>
                     <Grid Grid.Column="2" Margin="5 2">
-                        <Button Content="Remove"></Button>
+                        <Button Content="Remove" Command="{Binding RmCommand}" />
                     </Grid>
                 </Grid>
             </Grid>

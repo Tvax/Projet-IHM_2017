@@ -4,42 +4,40 @@ using Hitbox.Website;
 using System;
 
 namespace Hitbox.ViewModel {
-    public class AddViewModel : NotifyPropertyChangedBase {
+    public class ModifyViewModel : NotifyPropertyChangedBase {
         public DelegateCommand OKCommand { get; set; }
         public DelegateCommand CancelCommand { get; set; }
 
         private Streamer _streamer;
-        private bool _valid;
+        private bool _ans;
 
         public Streamer Streamer {
             get { return _streamer; }
             set { _streamer = value; }
         }
-
-        public bool Valid {
-            get { return _valid; }
-            set { _valid = value; }
+        
+        public bool Ans {
+            get { return _ans; }
+            set { _ans = value; }
         }
 
-        public AddViewModel(Streamer streamer) {
-            _streamer = streamer;
-
+        public ModifyViewModel(Streamer streamer) {
+            streamer = _streamer;
             OKCommand = new DelegateCommand(OnOKAction, CanExecuteOK);
             CancelCommand = new DelegateCommand(OnCancelAction, CanExecuteCancel);
         }
 
         #region OnActions
         private void OnCancelAction(object o) {
-            _valid = false;
+            _ans = false;
             ButtonPressedEvent.GetEvent().OnButtonPressedHandler(EventArgs.Empty);
         }
 
         private void OnOKAction(object o) {
-
             //if(usernamevalid)
 
             Streamer.LoadStreamerInfo();
-            _valid = true;
+            _ans = true;
             _streamer = Streamer;
             ButtonPressedEvent.GetEvent().OnButtonPressedHandler(EventArgs.Empty);
         }

@@ -66,6 +66,8 @@
     <Compile Include="ViewModel\AddViewModel.cs" />
     <Compile Include="ViewModel\ErrorViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ModifyViewModel.cs" />
+    <Compile Include="ViewModel\RemoveViewModel.cs" />
     <Compile Include="Website\Streamer.cs" />
     <Compile Include="Window_add.xaml.cs">
       <DependentUpon>Window_add.xaml</DependentUpon>
