@@ -99,7 +99,7 @@ namespace Hitbox.Website {
         }
 
         private void getLastFollowers() {
-            _url = "https://api.hitbox.tv/followers/user/" + _name + "?limit=5";
+            _url = "https://api.hitbox.tv/followers/user/" + _name + "?limit=50";
             string json = _webClient.DownloadString(_url);
             RootObject lastFollowers = JsonConvert.DeserializeObject<Request.RootObject>(json);
 

@@ -21,7 +21,7 @@ namespace Hitbox.ViewModel {
         private Window_remove _winRm { get; set; }
         private Window_modify _winMod { get; set; }
         private ObservableCollection<Streamer> _listStreamers;
-        private Streamer _streamer;
+        private Streamer _streamer = new Streamer();
         private bool _ans;
 
         public ObservableCollection<Streamer> ListStreamers {
@@ -89,7 +89,6 @@ namespace Hitbox.ViewModel {
             
             NotifyPropertyChanged("Streamer");
             NotifyPropertyChanged("ListStreamers");
-
         }
         #endregion
 

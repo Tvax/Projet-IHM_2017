@@ -5,11 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hitbox"
         mc:Ignorable="d"
-        Title="Window_modify" Height="200" Width="300">
-    
-    
-    <Grid>
+        Title="Modify" Height="200" Width="300">
 
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition  />
             <RowDefinition Height="0.25*"/>

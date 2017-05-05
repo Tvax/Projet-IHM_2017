@@ -6,10 +6,8 @@
         xmlns:local="clr-namespace:Hitbox"
         mc:Ignorable="d"
         Title="Window_remove" Height="200" Width="300">
-    
-    
-    <Grid>
 
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition  />
             <RowDefinition Height="0.25*"/>
@@ -19,8 +17,8 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Label x:Name="Add_Name" Content="Do you want to remove this streamer ?"  Grid.ColumnSpan="2" Margin="35 50" />
-        <Button Content="OK" Grid.Row="1" Grid.Column="0" Command="{Binding OKCommand}" Margin="3 2 3 0"/>
-        <Button Content="Cancel" Grid.Row="1" Grid.Column="1" Command="{Binding CancelCommand}" Margin="3 2 3 0"/>
+        <Button Content="OK" Grid.Row="1" Grid.Column="0" Command="{Binding Yes}" Margin="3 2 3 0"/>
+        <Button Content="Cancel" Grid.Row="1" Grid.Column="1" Command="{Binding No}" Margin="3 2 3 0"/>
 
     </Grid>
 </Window>
