@@ -9,10 +9,16 @@ namespace Hitbox.ViewModel {
         public DelegateCommand CancelCommand { get; set; }
 
         private Streamer _streamer;
+        private bool _valid;
 
         public Streamer Streamer {
             get { return _streamer; }
             set { _streamer = value; }
+        }
+
+        public bool Valid {
+            get { return _valid; }
+            set { _valid = value; }
         }
 
         public AddViewModel(Streamer streamer) {
@@ -30,7 +36,7 @@ namespace Hitbox.ViewModel {
 
         private void OnOKAction(object o) {
 
-            if(usernamevalid)
+            //if(usernamevalid)
 
             Streamer.LoadStreamerInfo();
             //Valid = true;
