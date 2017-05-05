@@ -5,15 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hitbox"
         mc:Ignorable="d"
-        Title="Window_add" Height="300" Width="300">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+        Title="Window_add" Height="200" Width="300">
+  <Grid>
 
-        <TextBox x:Name="Add_Name" Text="{Binding Streamer.Name}"/>
-        <Button Content="OK" Grid.Row="1" Command="{Binding OKCommand}"/>
-
-    </Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition  />
+      <RowDefinition Height="0.25*"/>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition/>
+      <ColumnDefinition/>
+    </Grid.ColumnDefinitions>
+    <TextBox x:Name="Add_Name" Text="{Binding Streamer.Name}" Grid.ColumnSpan="2" Margin="35 50" />
+    <Button Content="OK" Grid.Row="1" Grid.Column="0" Command="{Binding OKCommand}" Margin="3 2 3 0"/>
+    <Button Content="Cancel" Grid.Row="1" Grid.Column="1" Command="{Binding CancelCommand}" Margin="3 2 3 0"/>
+  </Grid>
 </Window>

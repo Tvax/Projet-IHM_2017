@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hitbox"
         mc:Ignorable="d"
-        Title="Window_error" Height="300" Width="300">
+        Title="Window_error" Height="200" Width="300">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="0.30*"/>
         </Grid.RowDefinitions>
-        <Label Content="{Binding StringError}"/>
-        <Button Content="OK" Grid.Row="1" Command="{Binding OKCommandError}"/>
+        <Label Content="{Binding StringError}" Margin="35 25 35 25"/>
+        <Button Content="OK" Grid.Row="1" Grid.Column="0" Command="{Binding OKCommandError}" Margin="40 0 40 12"/>
     </Grid>
 </Window>
