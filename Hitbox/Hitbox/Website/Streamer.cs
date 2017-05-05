@@ -12,6 +12,7 @@ namespace Hitbox.Website {
         private string _name;
         public string _viewers;
         private string _followers;
+        private string _live;
         private string _subActivated;
         private BitmapImage _profilePic;
         private ObservableCollection<BitmapImage> _listProfilePicture = new ObservableCollection<BitmapImage>();
@@ -24,6 +25,8 @@ namespace Hitbox.Website {
             set {
                 _listProfilePicture = value;
                 NotifyPropertyChanged("ListProfilePicture");
+                NotifyPropertyChanged("BitmapImage");
+
             }
         }
 
@@ -40,6 +43,11 @@ namespace Hitbox.Website {
         public string Followers {
             get { return _followers; }
             set { _followers = value; }
+        }
+
+        public string Live {
+            get { return _live; }
+            set { _live = value; }
         }
 
         public string SubActivated {
@@ -82,6 +90,12 @@ namespace Hitbox.Website {
             _name = user.user_name;
             _followers = user.followers;
             _profilePic = new BitmapImage(new Uri("https://edge.sf.hitbox.tv" + user.user_logo));
+            
+            if (user.is_live == "1")
+                _live = "On";
+            else
+                _live = "Off";
+
 
             if (user.user_partner == "1")
                 _subActivated = "On";
