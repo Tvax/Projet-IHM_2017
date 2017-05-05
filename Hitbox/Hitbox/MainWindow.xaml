@@ -88,12 +88,20 @@
 
                 <Grid Grid.Row="2">
                     <ListBox ItemsSource="{Binding Streamer.ListProfilePicture, UpdateSourceTrigger=PropertyChanged}" SelectedValue="{Binding Streamer, UpdateSourceTrigger=PropertyChanged}">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel HorizontalAlignment="Stretch" >
+                                    
+                                </WrapPanel>
+                            </ItemsPanelTemplate>
+                           
+                        </ListBox.ItemsPanel>
+                      
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Source="{Binding}" />
-                                </StackPanel>
+                                <Image Source="{Binding}"/>
                             </DataTemplate>
+                            
                         </ListBox.ItemTemplate>
                     </ListBox>
                 </Grid>
