@@ -69,7 +69,7 @@ namespace Hitbox.ViewModel {
             NotifyPropertyChanged("ListStreamers");
             }
             catch (Exception ){
-
+                _winAdd.Close();
                 _winEr = new Window_error("Unknown streamer !");
                 _winEr.ShowDialog();
             }
@@ -113,7 +113,7 @@ namespace Hitbox.ViewModel {
 
                 catch (Exception)
                 {
-
+                    _winMod.Close();
                     _winEr = new Window_error("Unknown streamer !");
                     _winEr.ShowDialog();
                 }
