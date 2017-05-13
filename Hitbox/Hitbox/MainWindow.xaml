@@ -31,8 +31,6 @@
                     <RowDefinition Height="30px"/>
                 </Grid.RowDefinitions>
 
-
-
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.4*"/>
