@@ -23,6 +23,7 @@ namespace Hitbox.ViewModel {
         private ObservableCollection<Streamer> _listStreamers;
         private Streamer _streamer;
         private bool _ans;
+        private Window_error _winEr;
 
         public ObservableCollection<Streamer> ListStreamers {
             get { return _listStreamers; }
@@ -56,13 +57,22 @@ namespace Hitbox.ViewModel {
 
             _winAdd = new Window_add(_streamer = new Streamer());
             _winAdd.Name = "Add";
-            _winAdd.ShowDialog();
+            try
+            {
+                _winAdd.ShowDialog();
 
-            if (_winAdd.ViewModel.Ans && !string.IsNullOrWhiteSpace(_winAdd.ViewModel.Streamer.Name) && !string.IsNullOrEmpty(_winAdd.ViewModel.Streamer.Name))
-                _listStreamers.Add(_winAdd.ViewModel.Streamer);
-
+            
+                if (_winAdd.ViewModel.Ans && !string.IsNullOrWhiteSpace(_winAdd.ViewModel.Streamer.Name) && !string.IsNullOrEmpty(_winAdd.ViewModel.Streamer.Name))
+                    _listStreamers.Add(_winAdd.ViewModel.Streamer);
+            
             NotifyPropertyChanged("Streamer");
             NotifyPropertyChanged("ListStreamers");
+            }
+            catch (Exception ){
+
+                _winEr = new Window_error("Unknown streamer !");
+                _winEr.ShowDialog();
+            }
         }
 
         private void OnRmAction(object o) {
@@ -81,7 +91,7 @@ namespace Hitbox.ViewModel {
 
 
         private void OnModAction(object obj) {
-           
+
 
             if (Streamer != null)
             {
@@ -90,14 +100,24 @@ namespace Hitbox.ViewModel {
 
                 _winMod = new Window_modify(Streamer);
                 _winMod.Name = "Modify";
-                _winMod.ShowDialog();
+                try
+                {
+                    _winMod.ShowDialog();
 
-                if (!_winMod.ViewModel.Ans || string.IsNullOrWhiteSpace(_winMod.ViewModel.Streamer.Name) || string.IsNullOrEmpty(_winMod.ViewModel.Streamer.Name))
-                    Streamer.Name = nameTmp;
+                    if (!_winMod.ViewModel.Ans || string.IsNullOrWhiteSpace(_winMod.ViewModel.Streamer.Name) || string.IsNullOrEmpty(_winMod.ViewModel.Streamer.Name))
+                        Streamer.Name = nameTmp;
+
+                    NotifyPropertyChanged("Streamer");
+                    NotifyPropertyChanged("ListStreamers");
+                }
+
+                catch (Exception)
+                {
+
+                    _winEr = new Window_error("Unknown streamer !");
+                    _winEr.ShowDialog();
+                }
             }
-            NotifyPropertyChanged("Streamer");
-            NotifyPropertyChanged("ListStreamers");
- 
         }
         #endregion
 

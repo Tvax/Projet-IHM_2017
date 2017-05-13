@@ -21,6 +21,7 @@ namespace Hitbox.Website {
 
         private WebClient _webClient;
         private string _url;
+        private string e;
 
         public ObservableCollection<BitmapImage> ListProfilePicture {
             get { return _listProfilePicture; }
@@ -79,29 +80,39 @@ namespace Hitbox.Website {
         }
 
         private void getUser() {
-            _url = "https://api.hitbox.tv/user/" + _name;
+            try
+            {
+                _url = "https://api.hitbox.tv/user/" + _name;
 
-            string json = _webClient.DownloadString(_url);
+                string json = _webClient.DownloadString(_url);
 
-            User.RootObject user = JsonConvert.DeserializeObject<User.RootObject>(json);
-
-            if (string.IsNullOrEmpty(user.user_name))
-                throw new Exception("Username Unknown");//open error window
-
-            _name = user.user_name;
-            _followers = user.followers;
-            _profilePic = new BitmapImage(new Uri("https://edge.sf.hitbox.tv" + user.user_logo));
-            
-            if (user.is_live == "1")
-                _live = "On";
-            else
-                _live = "Off";
+                User.RootObject user = JsonConvert.DeserializeObject<User.RootObject>(json);
 
 
-            if (user.user_partner == "1")
-                _subActivated = "On";
-            else
-                _subActivated = "Off";
+
+
+                if (string.IsNullOrEmpty(user.user_name))
+                    throw new Exception("Username Unknown");//open error window
+
+                _name = user.user_name;
+                _followers = user.followers;
+                _profilePic = new BitmapImage(new Uri("https://edge.sf.hitbox.tv" + user.user_logo));
+
+                if (user.is_live == "1")
+                    _live = "On";
+                else
+                    _live = "Off";
+
+
+                if (user.user_partner == "1")
+                    _subActivated = "On";
+                else
+                    _subActivated = "Off";
+            }
+            catch (Exception e )
+            { throw (e); }
+
+
         }
 
         private void getViews() {
