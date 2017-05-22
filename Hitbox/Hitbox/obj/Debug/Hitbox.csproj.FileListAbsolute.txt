@@ -37,3 +37,6 @@ C:\Users\teiva\Documents\GitHub\Projet-IHM_2017\Hitbox\Hitbox\obj\Debug\Window_m
 C:\Users\teiva\Documents\GitHub\Projet-IHM_2017\Hitbox\Hitbox\obj\Debug\Window_remove.baml
 C:\Users\teiva\Documents\GitHub\Projet-IHM_2017\Hitbox\Hitbox\obj\Debug\Window_error.g.cs
 C:\Users\teiva\Documents\GitHub\Projet-IHM_2017\Hitbox\Hitbox\obj\Debug\Window_error.baml
+C:\Users\teiva\Documents\GitHub\Projet-IHM_2017\Hitbox\Hitbox\obj\Debug\Window_login.g.cs
+C:\Users\teiva\Documents\GitHub\Projet-IHM_2017\Hitbox\Hitbox\obj\Debug\Window_login.baml
+C:\Users\teiva\Documents\GitHub\Projet-IHM_2017\Hitbox\Hitbox\bin\Debug\MySql.Data.dll
