@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hitbox"
         mc:Ignorable="d"
-        Title="Window_login" Height="300" Width="300">
+        Title="Login" Height="300" Width="300">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -18,10 +18,10 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Content="Register"/>
-            <Button Grid.Column="2" Content="Login"/>
+            <Button Content="Register" Command="{Binding RegCommand}"/>
+            <Button Grid.Column="2" Content="Login" Command="{Binding LogCommand}"/>
         </Grid>
-        <TextBox/>
-        <TextBox Grid.Row="1"/>
+        <TextBox Text="{Binding Member.Name, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Grid.Row="1" Text="{Binding Member.Password, UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>
 </Window>

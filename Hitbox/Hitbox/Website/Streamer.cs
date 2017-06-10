@@ -21,7 +21,7 @@ namespace Hitbox.Website {
 
         private WebClient _webClient;
         private string _url;
-        private string e;
+        private bool _userExists;
 
         public ObservableCollection<BitmapImage> ListProfilePicture {
             get { return _listProfilePicture; }
@@ -62,57 +62,60 @@ namespace Hitbox.Website {
             set { _profilePic = value; }
         }
 
+        public bool UserExists {
+            get { return _userExists; }
+            set { _userExists = value; }
+        }
+
         public Streamer() {
             _webClient = new WebClient();    
         }
 
         public void LoadStreamerInfo() {
             getUser();
-            getViews();
-            getLastFollowers();
-        }
-
-        private void defaultStreamer() {
-            _name = "masta";
-            _viewers = "0";
-            _followers = "0";
-            _subActivated = "No";//display sub disabled, whereas "subscribers on/off" on xaml?
+            if (UserExists) {
+                getViews();
+                GetLastFollowers();
+            }
         }
 
         private void getUser() {
-            try
-            {
-                _url = "https://api.hitbox.tv/user/" + _name;
+            _url = "https://api.hitbox.tv/user/" + _name;
 
-                string json = _webClient.DownloadString(_url);
-
-                User.RootObject user = JsonConvert.DeserializeObject<User.RootObject>(json);
-
-
-
-
-                if (string.IsNullOrEmpty(user.user_name))
-                    throw new Exception("Username Unknown");//open error window
-
-                _name = user.user_name;
-                _followers = user.followers;
-                _profilePic = new BitmapImage(new Uri("https://edge.sf.hitbox.tv" + user.user_logo));
-
-                if (user.is_live == "1")
-                    _live = "On";
-                else
-                    _live = "Off";
-
-
-                if (user.user_partner == "1")
-                    _subActivated = "On";
-                else
-                    _subActivated = "Off";
+            string json = _webClient.DownloadString(_url);
+            User.RootObject user = new User.RootObject();
+            try {
+                user = JsonConvert.DeserializeObject<User.RootObject>(json);
             }
-            catch (Exception e )
-            { throw (e); }
+            catch {
+                _winErr = new Window_error("Unknown streamer !");
+                _winErr.ShowDialog();
+                UserExists = false;
+                return;
+            }
+            UserExists = true;
+            /*
+            if (string.IsNullOrEmpty(user.user_name)) {
+                throw new Exception(e);//open error window
+            }
+            */
+            _name = user.user_name;
+            if (String.IsNullOrEmpty(user.followers))
+                _followers = "0";
+            else
+                _followers = user.followers;
+            _profilePic = new BitmapImage(new Uri("https://edge.sf.hitbox.tv" + user.user_logo));
+
+            if (user.is_live == "1")
+                _live = "On";
+            else
+                _live = "Off";
 
 
+            if (user.user_partner == "1")
+                _subActivated = "On";
+            else
+                _subActivated = "Off";
         }
 
         private void getViews() {
@@ -127,25 +130,23 @@ namespace Hitbox.Website {
           
         }
 
-        private void getLastFollowers() {
+        public void GetLastFollowers() {
+            ListProfilePicture.Clear();
             _url = "https://api.hitbox.tv/followers/user/" + _name + "?limit=50";
-
+            //mettre une image de base lorsque ya aps de followers avec un try catch ou check si error 404 or not
             try {
                 _json = _webClient.DownloadString(_url);
-                RootObject lastFollowers = JsonConvert.DeserializeObject<Request.RootObject>(_json);
-
-                ObservableCollection<Follower> lastF = new ObservableCollection<Follower>(lastFollowers.followers);
-                foreach (Follower f in lastF) {
-                    ListProfilePicture.Add(new BitmapImage(new Uri("https://edge.sf.hitbox.tv" + f.user_logo_small)));
-                }
             }
             catch {
-                _winErr = new Window_error("Unknown streamer !");
-                _winErr.ShowDialog();
-
-                //throw + make it in mainwindow
+                //ListProfilePicture.Add(new BitmapImage(new Uri("https://i.stack.imgur.com/ymxcL.png")));
+                return;
             }
-            
+            RootObject lastFollowers = JsonConvert.DeserializeObject<Request.RootObject>(_json);
+
+            ObservableCollection<Follower> lastF = new ObservableCollection<Follower>(lastFollowers.followers);
+            foreach (Follower f in lastF) {
+                ListProfilePicture.Add(new BitmapImage(new Uri("https://edge.sf.hitbox.tv" + f.user_logo_small)));
+            }
         }
 
         public override string ToString() {

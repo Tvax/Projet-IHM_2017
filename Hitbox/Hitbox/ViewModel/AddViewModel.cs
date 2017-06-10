@@ -34,12 +34,11 @@ namespace Hitbox.ViewModel {
         }
 
         private void OnOKAction(object o) {
-
-            //if(usernamevalid)
-
             Streamer.LoadStreamerInfo();
-            _ans = true;
-            _streamer = Streamer;
+            if (Streamer.UserExists) {
+                _ans = true;
+                _streamer = Streamer;
+            }
             ButtonPressedEvent.GetEvent().OnButtonPressedHandler(EventArgs.Empty);
         }
         #endregion

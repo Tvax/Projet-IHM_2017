@@ -1,0 +1,10 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Hitbox",
+    "\\Hitbox\\Hitbox",
+    "\\Hitbox\\Hitbox\\ViewModel"
+  ],
+  "SelectedNode": "\\Hitbox\\Hitbox\\Window_login.xaml.cs",
+  "PreviewInSolutionExplorer": false
+}
