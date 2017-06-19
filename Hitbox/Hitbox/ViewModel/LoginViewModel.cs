@@ -46,28 +46,19 @@ namespace Hitbox.ViewModel {
         public List<Member> Select() {
             string query = "SELECT * FROM User";
 
-            //Create a list to store the result
             List<Member> list = new List<Member>();
 
             if (OpenConnection()) {
-
-                //Create Command
                 MySqlCommand cmd = new MySqlCommand(query, _connection);
-                //Create a data reader and Execute the command
                 MySqlDataReader dataReader = cmd.ExecuteReader();
 
-                //Read the data and store them in the list
                 while (dataReader.Read()) {
                     list.Add(new Member { Name = (string)dataReader["name"], Password = (string)dataReader["password"] });
                 }
 
-                //close Data Reader
                 dataReader.Close();
-
-                //close Connection
                 CloseConnection();
 
-                //return list to be displayed
                 return list;
             }
             else {
@@ -126,11 +117,13 @@ namespace Hitbox.ViewModel {
         public void Insert() {
             string query = "INSERT INTO User (Name, Password) VALUES('" + _member.Name + "','" + _member.Password + "')";
 
-            //open connection
             if (OpenConnection()) {
-                //create command and assign the query and connection from the constructor
                 MySqlCommand cmd = new MySqlCommand(query, _connection);
-
+                if(string.IsNullOrEmpty(_member.Name) || string.IsNullOrWhiteSpace(_member.Name) || string.IsNullOrEmpty(_member.Password) || string.IsNullOrWhiteSpace(_member.Password)) {
+                    _winEr = new Window_error("Invalid login or password");
+                    _winEr.ShowDialog();
+                    return;
+                }
                 try {
                     cmd.ExecuteNonQuery();
                 }

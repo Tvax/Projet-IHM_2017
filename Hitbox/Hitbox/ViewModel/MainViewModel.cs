@@ -7,11 +7,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Media.Imaging;
 
-//TODO add banner in background?
 //TODO mettre ca dans add  if (_winAdd.ViewModel.Ans && !string.IsNullOrWhiteSpace(_winAdd.ViewModel.Streamer.Name) && !string.IsNullOrEmpty(_winAdd.ViewModel.Streamer.Name)) _listStreamers.Add(_winAdd.ViewModel.Streamer);
 // Et aussi dans modifier !
-//TODO Check si user exists avant de l'add a la DB
-//TODO Check si user != null or white before de l'add a DB
 
 
 namespace Hitbox.ViewModel {
@@ -57,7 +54,7 @@ namespace Hitbox.ViewModel {
             ButtonPressedEvent.GetEvent().Handler += CloseLogView;
             _winLog = new Window_login(_member = new Member());
             _winLog.ShowDialog();
-            if (_member.Name == null || _member.Password == null)
+            if (string.IsNullOrEmpty(_member.Name) || string.IsNullOrWhiteSpace(_member.Name) || string.IsNullOrEmpty(_member.Password) || string.IsNullOrWhiteSpace(_member.Password))
                 App.Current.Shutdown();
             ListStreamers = new ObservableCollection<Streamer>();
             LoadStreamers();
