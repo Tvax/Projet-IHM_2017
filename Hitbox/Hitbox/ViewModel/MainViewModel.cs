@@ -188,7 +188,7 @@ namespace Hitbox.ViewModel {
                 _winAdd.ShowDialog();
 
 
-                if (_winAdd.ViewModel.Ans && !string.IsNullOrWhiteSpace(_winAdd.ViewModel.Streamer.Name) && !string.IsNullOrEmpty(_winAdd.ViewModel.Streamer.Name))
+                if (_winAdd.ViewModel.Ans)
                     _listStreamers.Add(_winAdd.ViewModel.Streamer);
 
                 NotifyPropertyChanged("Streamer");
@@ -226,7 +226,7 @@ namespace Hitbox.ViewModel {
                 try {
                     _winMod.ShowDialog();
 
-                    if (!_winMod.ViewModel.Ans || string.IsNullOrWhiteSpace(_winMod.ViewModel.Streamer.Name) || string.IsNullOrEmpty(_winMod.ViewModel.Streamer.Name))
+                    if (!_winMod.ViewModel.Ans)
                         Streamer.Name = nameTmp;
 
                     NotifyPropertyChanged("Streamer");

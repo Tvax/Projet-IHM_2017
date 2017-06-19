@@ -35,6 +35,9 @@ namespace Hitbox.ViewModel {
 
         private void OnOKAction(object o) {
             Streamer.LoadStreamerInfo();
+            if (string.IsNullOrWhiteSpace(Streamer.Name) || string.IsNullOrEmpty(Streamer.Name)) {
+                return;
+            }
             if (Streamer.UserExists) {
                 _ans = true;
                 _streamer = Streamer;

@@ -124,7 +124,6 @@
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
                 <MenuItem Header="_Save" Command="{Binding SaveCommand}"/>
-                <MenuItem Header="_Theme"/>
                 <Separator />
                 <MenuItem Header="_Save and Quit" Command="{Binding QuitCommand}"/>
             </MenuItem>
