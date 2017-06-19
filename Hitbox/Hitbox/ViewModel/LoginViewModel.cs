@@ -1,7 +1,6 @@
 ﻿using System;
 using Hitbox.Library;
 using Hitbox.Website;
-using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +17,10 @@ namespace Hitbox.ViewModel {
         private Member _member;
 
         private MySqlConnection _connection;
-        private string server;
-        private string database;
-        private string uid;
-        private string password;
+        private string _server;
+        private string _database;
+        private string _uid;
+        private string _password;
 
         public Member Member {
             get { return _member; }
@@ -33,13 +32,13 @@ namespace Hitbox.ViewModel {
             RegCommand = new DelegateCommand(OnRegAction, CanExecuteReg);
             LogCommand = new DelegateCommand(OnLogAction, CanExecuteLog);
 
-            server = "185.28.20.242";
-            database = "u552241586_hit";
-            uid = "u552241586_tvax";
-            password = "motdepasse";
+            _server = "185.28.20.242";
+            _database = "u552241586_hit";
+            _uid = "u552241586_tvax";
+            _password = "motdepasse";
             string connectionString;
-            connectionString = "SERVER=" + server + ";" + "DATABASE=" +
-            database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+            connectionString = "SERVER=" + _server + ";" + "DATABASE=" +
+            _database + ";" + "UID=" + _uid + ";" + "PASSWORD=" + _password + ";";
             _connection = new MySqlConnection(connectionString);
 
         }
@@ -86,13 +85,11 @@ namespace Hitbox.ViewModel {
                     case 0:
                         _winEr = new Window_error("Cannot connect to server.");
                         _winEr.ShowDialog();
-                        //MessageBox.Show("Cannot connect to server.  Contact administrator");
                         break;
 
                     case 1045:
                         _winEr = new Window_error("Invalid username/password, please try again");
-                        _winEr.ShowDialog();
-                        //MessageBox.Show("Invalid username/password, please try again");
+                        _winEr.ShowDialog();   
                         break;
                 }
                 return false;
@@ -107,7 +104,7 @@ namespace Hitbox.ViewModel {
             catch (MySqlException ex) {
                 _winEr = new Window_error(ex.Message);
                 _winEr.ShowDialog();
-                //MessageBox.Show(ex.Message);
+                
                 return false;
             }
         }
@@ -134,10 +131,14 @@ namespace Hitbox.ViewModel {
                 //create command and assign the query and connection from the constructor
                 MySqlCommand cmd = new MySqlCommand(query, _connection);
 
-                //Execute command
-                cmd.ExecuteNonQuery();
-
-                //close connection
+                try {
+                    cmd.ExecuteNonQuery();
+                }
+                catch {
+                    CloseConnection();
+                    _winEr = new Window_error("Username already taken !");
+                    _winEr.ShowDialog();
+                }
                 CloseConnection();
             }
         }

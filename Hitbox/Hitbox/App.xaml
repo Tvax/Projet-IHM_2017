@@ -4,11 +4,14 @@
              xmlns:local="clr-namespace:Hitbox"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <!--<Style x:Key="HelveticaStyle" TargetType="{x:Type Control}">
-            <Setter Property="Foreground" Value="Black" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="FontFamily" Value="Helvetica" />
-            <Setter Property="FontStyle" Value="Normal" />
-        </Style>-->
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

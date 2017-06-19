@@ -1,5 +1,6 @@
 ﻿using Hitbox.ViewModel;
 using Hitbox.Website;
+using System;
 using System.Windows;
 
 namespace Hitbox {

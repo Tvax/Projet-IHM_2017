@@ -31,12 +31,13 @@ namespace Hitbox.ViewModel {
         private ObservableCollection<Streamer> _listStreamers;
         private Streamer _streamer;
         private Member _member;
+
         private bool _ans;
 
-        private string server;
-        private string database;
-        private string uid;
-        private string password;
+        private string _server;
+        private string _database;
+        private string _uid;
+        private string _password;
         private MySqlConnection _connection;
 
         public ObservableCollection<Streamer> ListStreamers {
@@ -56,29 +57,26 @@ namespace Hitbox.ViewModel {
             ButtonPressedEvent.GetEvent().Handler += CloseLogView;
             _winLog = new Window_login(_member = new Member());
             _winLog.ShowDialog();
+            if (_member.Name == null || _member.Password == null)
+                App.Current.Shutdown();
             ListStreamers = new ObservableCollection<Streamer>();
             LoadStreamers();
-            //if (User.Username == null || User.Password == null) App.Current.Shutdown();
 
             AddCommand = new DelegateCommand(OnAddAction, CanExecuteAdd);
             RmCommand = new DelegateCommand(OnRmAction, CanExecuteRm);
             ModCommand = new DelegateCommand(OnModAction, CanExecuteMod);
             SaveCommand = new DelegateCommand(OnSaveAction, CanExecuteSave);
             QuitCommand = new DelegateCommand(OnQuitAction, CanExecuteQuit);
-            
-
         }
-
-
 
         #region Database
         private void LoadStreamers() {
-            server = "185.28.20.242";
-            database = "u552241586_hit";
-            uid = "u552241586_tvax";
-            password = "motdepasse";
-            string connectionString = "SERVER=" + server + ";" + "DATABASE=" +
-            database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+            _server = "185.28.20.242";
+            _database = "u552241586_hit";
+            _uid = "u552241586_tvax";
+            _password = "motdepasse";
+            string connectionString = "SERVER=" + _server + ";" + "DATABASE=" +
+            _database + ";" + "UID=" + _uid + ";" + "PASSWORD=" + _password + ";";
             _connection = new MySqlConnection(connectionString);
 
             Select();

@@ -6,10 +6,10 @@
         xmlns:local="clr-namespace:Hitbox"
         mc:Ignorable="d"
         MinHeight="300" MinWidth="825"
-        Title="Hitbox Streamer Manager" Height="350" Width="825">
+        Title="Hitbox Streamer Manager" Height="350" Width="825" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20px"/>
+            <RowDefinition Height="30px"/>
             <RowDefinition Height="0.9*"/>
         </Grid.RowDefinitions>
 
